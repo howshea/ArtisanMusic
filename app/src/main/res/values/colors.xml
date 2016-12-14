@@ -3,4 +3,14 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="colorPrimaryRed">#CB4042</color>
+
+    <color name="translucent_black">#70000000</color>
+
+    <color name="translucent_white">#40FFFFFF</color>
+    <color name="translucent_gray">#88aaaaaa</color>
+    <color name="song_title">#333333</color>
+    <color name="divider_color">#dadcdd</color>
+    <color name="backgroud_gray">#f2f4f5</color>
 </resources>

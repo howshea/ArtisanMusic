@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/backgroud_gray"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/all_songs_layout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/backgroud_gray">
+
+        <ImageView
+            android:id="@+id/all_songs_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_local_songs"/>
+
+        <TextView
+            android:id="@+id/all_songs_text_view"
+            style="@style/SongTitleAppearance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/all_songs_img"
+            android:text="@string/all_songs"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@id/all_songs_img"
+            android:background="@color/divider_color"/>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/favorite_songs_layout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/backgroud_gray">
+
+        <ImageView
+            android:id="@+id/favorite_songs_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_favorite_songs"/>
+
+        <TextView
+            android:id="@+id/favorite_songs_text_view"
+            style="@style/SongTitleAppearance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/favorite_songs_img"
+            android:text="@string/favorite_songs"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@id/favorite_songs_img"
+            android:background="@color/divider_color"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E6E8E9"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lists_count_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="创建的歌单(0)"
+            android:textSize="13sp"/>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lists_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/backgroud_gray"
+        android:divider="@color/divider_color"
+        android:dividerHeight="1px">
+    </ListView>
+
+    <TextView
+        android:id="@+id/add_play_list_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/backgroud_gray"
+        android:drawableLeft="@drawable/ic_add"
+        android:drawablePadding="5dp"
+        android:gravity="center_vertical"
+        android:text="Add play list"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/divider_color"/>
+
+</LinearLayout>

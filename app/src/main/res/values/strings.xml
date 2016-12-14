@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">ArtisanMusic</string>
+    <string name="add_play_list">新建歌单</string>
+    <string name="unknown">未知</string>
+    <string name="local_no_song">未扫描到歌曲</string>
+    <string name="first_scan_music">扫描音乐中，请耐心等待</string>
+    <string name="all_songs">所有音乐</string>
+    <string name="favorite_songs">Favorite</string>
+    <string name="list_loop">列表循环</string>
+    <string name="single_loop">单曲循环</string>
+    <string name="random_play">随机播放</string>
+    <string name="loading">玩命加载中</string>
+    <string name="add_to_list">收藏到歌单</string>
 </resources>

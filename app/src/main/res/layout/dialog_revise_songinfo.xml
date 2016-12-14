@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:padding="24dp">
+
+    <EditText
+        android:id="@+id/revise_song_title_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:drawableLeft="@drawable/ic_revise_song"
+        android:drawablePadding="5dp"
+        android:gravity="center_vertical"
+        android:hint="输入歌曲名"
+        android:singleLine="true"
+        android:textColorHint="#D1D1D1"
+        android:textCursorDrawable="@drawable/edit_text_cursor"
+        android:textSize="14sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_marginBottom="24dp"
+        android:background="#cccccc"/>
+
+    <EditText
+        android:id="@+id/revise_singer_name_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:drawableLeft="@drawable/ic_revise_singer"
+        android:drawablePadding="5dp"
+        android:gravity="center_vertical"
+        android:hint="输入歌手名"
+        android:singleLine="true"
+        android:textColorHint="#D1D1D1"
+        android:textCursorDrawable="@drawable/edit_text_cursor"
+        android:textSize="14sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_marginBottom="24dp"
+        android:background="#cccccc"/>
+
+    <EditText
+        android:id="@+id/revise_album_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:drawableLeft="@drawable/ic_revise_album"
+        android:drawablePadding="5dp"
+        android:gravity="center_vertical"
+        android:hint="输入专辑名"
+        android:singleLine="true"
+        android:textColorHint="#D1D1D1"
+        android:textCursorDrawable="@drawable/edit_text_cursor"
+        android:textSize="14sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#cccccc"/>
+</LinearLayout>

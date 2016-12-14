@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/edit_song_dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:textColor="#888888"
+        android:textSize="13sp"
+        tools:text="歌曲：向往"/>
+
+    <TextView
+        android:id="@+id/edit_song_delete_tv"
+        style="@style/SongBottomAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:drawableLeft="@drawable/ic_delete_red"
+        android:drawablePadding="10dp"
+        android:gravity="center_vertical"
+        android:text="删除"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="10dp"
+        android:background="@color/divider_color"/>
+
+    <TextView
+        android:id="@+id/edit_song_singer_name_tv"
+        style="@style/SongBottomAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:drawableLeft="@drawable/ic_singer"
+        android:drawablePadding="10dp"
+        android:gravity="center_vertical"
+        tools:text="歌手：张碧晨"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="10dp"
+        android:background="@color/divider_color"/>
+
+    <TextView
+        android:id="@+id/edit_song_album_name_tv"
+        style="@style/SongBottomAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:drawableLeft="@drawable/ic_album"
+        android:drawablePadding="10dp"
+        android:gravity="center_vertical"
+        tools:text="专辑：曾经守候"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="10dp"
+        android:background="@color/divider_color"/>
+
+    <TextView
+        android:id="@+id/edit_song_edit_tv"
+        style="@style/SongBottomAppearance"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:drawableLeft="@drawable/ic_edit_song_info"
+        android:drawablePadding="10dp"
+        android:gravity="center_vertical"
+        android:text="编辑歌曲信息"/>
+
+</LinearLayout>

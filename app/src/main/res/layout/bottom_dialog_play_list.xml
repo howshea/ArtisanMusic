@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="400dp"
+    >
+    <FrameLayout
+        android:id="@+id/list_head_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/bottom_title_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            style="@style/SongTitleAppearance"
+            tools:text="播放列表（120）"/>
+
+        <TextView
+            android:id="@+id/clear_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:paddingRight="10dp"
+            android:textSize="13sp"
+            android:textColor="@android:color/darker_gray"
+            android:text="清空"/>
+        <View
+            android:layout_gravity="bottom"
+            android:background="@color/divider_color"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+    </FrameLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/bottom_play_recycler_view"
+        android:layout_below="@id/list_head_layout"
+        android:layout_width="match_parent"
+        android:layout_height="350dp">
+
+    </android.support.v7.widget.RecyclerView>
+</RelativeLayout>

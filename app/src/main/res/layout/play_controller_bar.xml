@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/play_time_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00"
+            android:textColor="#A0FFFFFF"
+            android:textSize="9sp"/>
+
+        <SeekBar
+            android:id="@+id/play_seek_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:maxHeight="2dp"
+            android:minHeight="2dp"
+            android:progressDrawable="@drawable/play_seek_bar_style"
+            android:thumb="@drawable/ic_seekbar_pointer"/>
+
+        <TextView
+            android:id="@+id/play_duration_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/translucent_gray"
+            android:textSize="9sp"
+            tools:text="03:56"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/play_mode_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/prev_song_image_view"
+            android:scaleType="fitCenter"
+            android:src="@drawable/play_mode_level_list"/>
+
+        <ImageView
+            android:id="@+id/prev_song_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toLeftOf="@+id/play_pause_image_view"
+            android:scaleType="fitCenter"
+            android:src="@drawable/prev_song_button"/>
+
+        <ImageView
+            android:id="@+id/play_pause_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/play_or_pause_selector"/>
+
+        <ImageView
+            android:id="@+id/next_song_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/play_pause_image_view"
+            android:scaleType="fitCenter"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/next_song_button"/>
+
+        <ImageView
+            android:id="@+id/play_list_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/next_song_image_view"
+            android:scaleType="fitCenter"
+            android:src="@drawable/play_list_button"/>
+    </RelativeLayout>
+</LinearLayout>

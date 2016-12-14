@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/list_header_text_view"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="6dp"
+        android:background="#eeeeee"
+        android:gravity="center"
+        android:textSize="25sp"
+        tools:text="B"/>
+
+    <TextView
+        android:id="@+id/list_dec_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/list_header_text_view"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingTop="8dp"
+        tools:text="我最喜欢的音乐"/>
+
+    <TextView
+        android:id="@+id/list_count_text_view"
+        style="@style/SmallTextAppearance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/list_header_text_view"
+        android:paddingBottom="8dp"
+        tools:text="15首"/>
+
+    <ImageView
+        android:id="@+id/list_menu_image_view"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentRight="true"
+        android:background="?android:attr/selectableItemBackground"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_item_menu"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentBottom="true"
+        android:background="@color/divider_color"/>
+</RelativeLayout>
