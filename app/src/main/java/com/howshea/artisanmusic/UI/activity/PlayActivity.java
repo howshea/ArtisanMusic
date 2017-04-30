@@ -133,6 +133,7 @@ public class PlayActivity extends BaseActivtiy<IPlay, PlayPresenter> implements 
     public void setPlayOrPause(IsPlayingEvent event) {
         isPlaying = event.isPlaying();
         mPlayPauseImageView.setSelected(isPlaying);
+        mVinylRecordView.setIsPlaying(isPlaying);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
