@@ -1,14 +1,14 @@
 ext {
     android = [
-            compileSdkVersion: 24,
+            compileSdkVersion: 25,
             buildToolsVersion: "25.0.0",
             minSdkVersion    : 19,
-            targetSdkVersion : 24,
+            targetSdkVersion : 25,
     ]
 
     dependencies = [
-            appcompatv7        : 'com.android.support:appcompat-v7:24.0.0',
-            design             : 'com.android.support:design:24.0.0',
+            appcompatv7        : 'com.android.support:appcompat-v7:25.+',
+            design             : 'com.android.support:design:25.+',
             rxjava             : 'io.reactivex:rxjava:1.2.1',
             rxAndroid          : 'io.reactivex:rxandroid:1.2.1',
             logger             : 'com.orhanobut:logger:1.15',
