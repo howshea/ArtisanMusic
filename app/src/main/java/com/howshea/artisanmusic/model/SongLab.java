@@ -119,7 +119,7 @@ public class SongLab {
         values.put(SongTable.FILENAME, song.getFileName());
         values.put(SongTable.FILESIZE, song.getFileSize());
         values.put(SongTable.YEAR, song.getYear());
-        values.put(SongTable.ISLIKE, song.isLike() == false ? 0 : 1);
+        values.put(SongTable.ISLIKE, !song.isLike() ? 0 : 1);
         return values;
     }
 
@@ -173,13 +173,12 @@ public class SongLab {
 
     public int updateSong(Song song) {
         ContentValues values = getSongContentValues(song);
-        int row = mDatabase.update(
+        return  mDatabase.update(
                 SongTable.TABLE_NAME,
                 values,
                 SongTable.SONG_ID + "= ?",
                 new String[]{Long.toString(song.getSongId())
                 });
-        return row;
     }
 
 
@@ -207,8 +206,7 @@ public class SongLab {
      */
     public long addSonglist(SongList songList) {
         ContentValues values = getSongListContentValues(songList);
-        long rowId = mDatabase.insert(SongListTable.TABLE_NAME, null, values);
-        return rowId;
+        return mDatabase.insert(SongListTable.TABLE_NAME, null, values);
     }
 
 
@@ -258,8 +256,8 @@ public class SongLab {
     }
 
     /**
-     * @param songId
-     * @param songList
+     * @param songId 歌曲ID
+     * @param songList 歌单
      */
     public boolean addToList(long songId, SongList songList) {
         ContentValues values = new ContentValues();
@@ -386,10 +384,6 @@ public class SongLab {
         int i1 = mDatabase.delete(SongAndListTable.TABLE_NAME,
                 SongAndListTable.SONGLIST_UUID + "=?",
                 new String[]{id.toString()});
-        if (i + i1 >= 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return i + i1 >= 1;
     }
 }

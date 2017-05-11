@@ -80,7 +80,7 @@ public class SongListViewAdapter extends BaseAdapter {
     }
 
 
-    static class ViewHolder {
+    private static class ViewHolder {
         TextView mListHeaderTextView;
         TextView mListDecTextView;
         TextView mListCountTextView;

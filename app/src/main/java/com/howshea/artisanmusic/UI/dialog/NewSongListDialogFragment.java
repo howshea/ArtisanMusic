@@ -27,7 +27,6 @@ import com.howshea.artisanmusic.event.CreateListEvent;
 public class NewSongListDialogFragment extends DialogFragment {
 
     private AlertDialog mDialog;
-    private EditText mTitleEditText;
     private TextView mTitleCount;
     private String mTitle;
 
@@ -40,7 +39,7 @@ public class NewSongListDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = View.inflate(getActivity(), R.layout.dialog_new_list, null);
-        mTitleEditText = (EditText) view.findViewById(R.id.song_list_title_edit_text);
+        EditText mTitleEditText = (EditText) view.findViewById(R.id.song_list_title_edit_text);
         mTitleCount = (TextView) view.findViewById(R.id.title_count_text_view);
         mTitleEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -92,6 +91,7 @@ public class NewSongListDialogFragment extends DialogFragment {
         //set width of the dialog
         DisplayMetrics dm = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+        //以百分比设置大小
         mDialog.getWindow().setLayout((int) (dm.widthPixels * 0.85), ViewGroup.LayoutParams.WRAP_CONTENT);
         mDialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(false);
     }

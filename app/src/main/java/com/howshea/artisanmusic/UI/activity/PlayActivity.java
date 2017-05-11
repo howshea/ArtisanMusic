@@ -142,6 +142,7 @@ public class PlayActivity extends BaseActivtiy<IPlay, PlayPresenter> implements 
     }
 
     private void initStatusBar() {
+        //设置状态栏透明
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
 
         setSupportActionBar(mPlayToolBar);

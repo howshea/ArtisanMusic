@@ -55,7 +55,7 @@ public class PlayPresenter extends BasePresenter<IPlay> {
                 .create(new Observable.OnSubscribe<Integer>() {
                     @Override
                     public void call(Subscriber<? super Integer> subscriber) {
-                        int i = SongLab.get().deleteSong(id);
+                        SongLab.get().deleteSong(id);
                         subscriber.onCompleted();
                     }
                 })

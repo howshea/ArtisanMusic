@@ -392,11 +392,7 @@ public class PlayService extends Service {
     }
 
     public boolean isDataPrepared() {
-        if (mSongs == null) {
-            return false;
-        } else {
-            return true;
-        }
+        return mSongs != null;
     }
 
     public void seekTo(int position) {
@@ -426,8 +422,9 @@ public class PlayService extends Service {
     private void createShuffleList() {
         mShuffleList = new ArrayList<>(mSongs);
         shuffle(mShuffleList);
+        //当播放模式处于随机播放时，校准位置
         if (mPlayMode == RANDOM_PLAY) {
-            //校准位置
+
             for (int i = 0; i < mShuffleList.size(); i++) {
                 if (mShuffleList.get(i).equals(mSongs.get(mPosition))) {
                     mPosition = i;
@@ -459,7 +456,7 @@ public class PlayService extends Service {
         /**
          * return a reference of the outer service
          *
-         * @return
+         * @return 服务实例
          */
         public PlayService getService() {
             return PlayService.this;

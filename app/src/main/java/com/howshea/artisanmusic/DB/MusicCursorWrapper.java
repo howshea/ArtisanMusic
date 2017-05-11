@@ -13,7 +13,9 @@ import com.howshea.artisanmusic.model.SongList;
 import java.util.UUID;
 
 /**
- * Created by haipo on 2016/11/5.
+ * Created by haipo
+ * on 2016/11/5.
+ *
  */
 
 public class MusicCursorWrapper extends CursorWrapper {
@@ -32,7 +34,7 @@ public class MusicCursorWrapper extends CursorWrapper {
         String filename = getString(getColumnIndex(SongTable.FILENAME));
         long filesize = getLong(getColumnIndex(SongTable.FILESIZE));
         String year = getString(getColumnIndex(SongTable.YEAR));
-        boolean islike = getInt(getColumnIndex(SongTable.ISLIKE)) == 0 ? false : true;
+        boolean islike = getInt(getColumnIndex(SongTable.ISLIKE)) != 0;
         Song song = new Song();
         song.setSongId(songId);
         song.setTitle(title);

@@ -2,6 +2,7 @@ package com.howshea.artisanmusic.UI.dialog;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
@@ -58,6 +59,7 @@ public class PlayListBottomFragment extends BottomSheetDialogFragment {
         mCurrentSong = mApp.getCurrentSongInfo().getSong();
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         BottomSheetDialog dialog = new BottomSheetDialog(getActivity());
@@ -110,7 +112,7 @@ public class PlayListBottomFragment extends BottomSheetDialogFragment {
         private final ImageView mPlayingImg;
         private final SpannableStringBuilder mBuilder;
 
-        public PlayListHolder(View itemView) {
+        PlayListHolder(View itemView) {
             super(itemView);
             mTitle = (TextView) itemView.findViewById(R.id.bottom_item_title_text_view);
             mPlayingImg = (ImageView) itemView.findViewById(R.id.playing_image_view);
@@ -118,7 +120,7 @@ public class PlayListBottomFragment extends BottomSheetDialogFragment {
             mBuilder = new SpannableStringBuilder();
         }
 
-        public void BindData(int position) {
+        void BindData(int position) {
             mBuilder.append(mPlayList.get(position).getTitle()).
                     append(TextUtils.formatString(getActivity(),
                             " - " + mPlayList.get(position).getArtist(),
