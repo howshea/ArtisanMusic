@@ -3,7 +3,8 @@ package com.howshea.artisanmusic.model;
 import java.io.Serializable;
 
 /**
- * Created by haipo on 2016/11/5.
+ * Created by haipo
+ *  on 2016/11/5.
  */
 
 public class Song implements Serializable {
@@ -102,7 +103,7 @@ public class Song implements Serializable {
         mFileName = fileName;
     }
 
-    public long getFileSize() {
+    long getFileSize() {
         return mFileSize;
     }
 
@@ -110,7 +111,7 @@ public class Song implements Serializable {
         mFileSize = fileSize;
     }
 
-    public String getYear() {
+    String getYear() {
         return mYear;
     }
 
@@ -124,9 +125,9 @@ public class Song implements Serializable {
             return true;
         if (obj instanceof Song) {
             Song song = (Song) obj;
+            //id和歌曲名都相同，则认为是一首歌
             return (this.mSongId == song.mSongId) && (this.mTitle.equals(song.mTitle));
         }
         return false;
     }
-
 }

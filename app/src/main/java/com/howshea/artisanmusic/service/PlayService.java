@@ -43,7 +43,6 @@ import rx.Subscriber;
 import rx.schedulers.Schedulers;
 
 public class PlayService extends Service {
-
     private static final int LIST_LOOP = 0;
     private static final int SINGLE_LOOP = 1;
     private static final int RANDOM_PLAY = 2;
@@ -67,7 +66,6 @@ public class PlayService extends Service {
     private NotificationTarget notificationTarget;
 
     public PlayService() {
-
     }
 
     @Override
@@ -77,7 +75,6 @@ public class PlayService extends Service {
         mPlayer = new MediaPlayer();
         mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-
             @Override
             public void onPrepared(MediaPlayer mp) {
                 mp.start();
@@ -89,8 +86,8 @@ public class PlayService extends Service {
                 nextSong();
             }
         });
+        //注册EventBus事件
         AppApplication.getMyEventBus().register(this);
-
         //注册Broadcast ，用于接收通知栏点击事件
         PlayReceiver playReceiver = new PlayReceiver();
         IntentFilter mFilter = new IntentFilter();
@@ -98,9 +95,7 @@ public class PlayService extends Service {
         mFilter.addAction(ACTION_PRE);
         mFilter.addAction(ACTION_NEXT);
         mFilter.addAction(ACTION_CLOSE);
-
         registerReceiver(playReceiver, mFilter);
-
         //初始化通知栏
         Intent intent = new Intent(this, PlayActivity.class);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext());
@@ -110,7 +105,7 @@ public class PlayService extends Service {
                 .setSmallIcon(R.drawable.ic_album_white_24dp)
                 .setContentTitle("")
                 .setContentText("");
-
+        //广播事件
         Intent intentPlay = new Intent(ACTION_PLAY);
         PendingIntent pendingIntentPlay = PendingIntent.getBroadcast(getApplicationContext(), 0x123, intentPlay, PendingIntent.FLAG_UPDATE_CURRENT);
         mRemoteViews.setOnClickPendingIntent(R.id.noti_play_pause, pendingIntentPlay);
@@ -128,7 +123,6 @@ public class PlayService extends Service {
         mRemoteViews.setOnClickPendingIntent(R.id.noti_close_img, pendingIntentClose);
 
         mNotification = builder.build();
-
         //用于Glide往通知栏插入图片的Targe
         notificationTarget = new NotificationTarget(
                 getApplicationContext(),
@@ -136,9 +130,7 @@ public class PlayService extends Service {
                 R.id.noti_album_img,
                 mNotification,
                 0x111);
-
     }
-
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -147,6 +139,7 @@ public class PlayService extends Service {
 
     @Override
     public void onDestroy() {
+        //释放所有资源
         mPlayer.release();
         mTimer.cancel();
         mTask.cancel();
@@ -154,7 +147,6 @@ public class PlayService extends Service {
         stopForeground(true);
         super.onDestroy();
     }
-
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -170,7 +162,6 @@ public class PlayService extends Service {
         mTimer.schedule(mTask, 0, 1000);
         return new PlayBinder();
     }
-
 
     public void playMusic(ArrayList<Song> songs, int position) {
         if (songs == null) {
@@ -207,10 +198,9 @@ public class PlayService extends Service {
                             mPlayer.setDataSource(songs.get(position).getUri());
                             mPlayer.prepare();
                             LogUtils.logi("正在播放：" + mCurrentSong.getTitle());
-
                         } catch (IOException e) {
+                            //IO异常时捕获并发送事件通知其它组件
                             AppApplication.getMyEventBus().post(new SongNoExistEvent());
-
                         }
                         subscriber.onCompleted();
                     }
@@ -220,20 +210,19 @@ public class PlayService extends Service {
                     @Override
                     public void onCompleted() {
                     }
-
                     @Override
                     public void onError(Throwable e) {
                         unsubscribe();
-                        LogUtils.loge(e, "什么鬼");
+                        LogUtils.loge(e, "出错了");
                     }
-
                     @Override
                     public void onNext(Object o) {
-
                     }
                 });
     }
-
+    /**
+     * 更新Notification的UI状态
+     */
     private void updateNotification(Song song) {
         mRemoteViews.setTextViewText(R.id.noti_title_tv, song.getTitle());
         mRemoteViews.setTextViewText(R.id.noti_subtitle_tv, song.getArtist());
@@ -249,19 +238,16 @@ public class PlayService extends Service {
                     .placeholder(R.drawable.default_cover)
                     .into(notificationTarget);
         }
-
         mRemoteViews.setImageViewResource(R.id.noti_play_pause, R.drawable.ic_noti_pause);
-
         startForeground(0x111, mNotification);
     }
-
 
     //用于bottomdialog的点击换歌
     public void playInList(int position) {
         playOne(mSongs, position);
         mPosition = position;
     }
-
+    //替换播放列表
     private void playOne(ArrayList<Song> songs, int position) {
         AppApplication.getMyEventBus().post(new PlayStatusEvent(songs.get(position)));
         prepare(songs, position);
@@ -335,17 +321,18 @@ public class PlayService extends Service {
         return mPlayMode;
     }
 
+    @SuppressWarnings("unused")
     public void rePlay() {
         if (!mPlayer.isPlaying()) {
             mPlayer.start();
         }
     }
 
+    @SuppressWarnings("unused")
     public void pauseMusic() {
         if (mPlayer.isPlaying())
             mPlayer.pause();
     }
-
 
     public void playOrPause() {
         if (mSongs == null) {
@@ -381,8 +368,6 @@ public class PlayService extends Service {
         }
     }
 
-
-
     public PlayStatusEvent getCurrentSongInfo() {
         if (mSongs == null)
             return null;
@@ -403,7 +388,10 @@ public class PlayService extends Service {
         return mSongs;
     }
 
-
+    /**
+     * 随机播放算法
+     * @param list 新的list
+     */
     private static void shuffle(ArrayList<Song> list) {
         int key;
         Song temp;
@@ -419,12 +407,14 @@ public class PlayService extends Service {
 
     }
 
+    /**
+     * 创建随机播放列表
+     */
     private void createShuffleList() {
         mShuffleList = new ArrayList<>(mSongs);
         shuffle(mShuffleList);
         //当播放模式处于随机播放时，校准位置
         if (mPlayMode == RANDOM_PLAY) {
-
             for (int i = 0; i < mShuffleList.size(); i++) {
                 if (mShuffleList.get(i).equals(mSongs.get(mPosition))) {
                     mPosition = i;
@@ -435,11 +425,9 @@ public class PlayService extends Service {
 
     @Subscribe(threadMode = ThreadMode.ASYNC)
     public void removeMistakeSong(SongNoExistEvent event) {
-
         int i = SongLab.get().deleteSong(mCurrentSong.getSongId());
         LogUtils.logi("删除" + i + "行");
     }
-
 
     public void deleteSong(Song song) {
         if (mSongs.contains(song)) {
@@ -452,17 +440,17 @@ public class PlayService extends Service {
     }
 
     public class PlayBinder extends Binder {
-
         /**
-         * return a reference of the outer service
-         *
-         * @return 服务实例
+         * @return a reference of the outer service
          */
         public PlayService getService() {
             return PlayService.this;
         }
     }
 
+    /**
+     * 定义一个BroadcastReceiver，用于前台和Service的交互动作
+     */
     public class PlayReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -481,9 +469,7 @@ public class PlayService extends Service {
                 case PlayService.ACTION_CLOSE:
                     PlayService.this.stopMusic();
                     break;
-
             }
         }
     }
-
 }

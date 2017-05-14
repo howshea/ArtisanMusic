@@ -31,7 +31,7 @@ public class VinylRecord extends SurfaceView implements SurfaceHolder.Callback, 
     private SurfaceHolder mHolder;
     private Canvas mCanvas;
 
-    private int mWidth;
+//    private int mWidth;
 
     private boolean mIsDrawing;
     private Bitmap mTopLine;
@@ -120,6 +120,7 @@ public class VinylRecord extends SurfaceView implements SurfaceHolder.Callback, 
         mRecordBgX = -mRecordBg.getWidth() / 2;
     }
 
+    @SuppressWarnings("unused")
     private void recycleBitmap() {
         if (mTopLine != null) {
             mTopLine.recycle();
@@ -163,7 +164,7 @@ public class VinylRecord extends SurfaceView implements SurfaceHolder.Callback, 
     @Override
     public void run() {
         Log.i(tag, "run");
-        long t = 0;
+        long t;
         while (mIsDrawing) {
             t = System.currentTimeMillis();
             doDraw();
@@ -203,7 +204,7 @@ public class VinylRecord extends SurfaceView implements SurfaceHolder.Callback, 
 
     @Override
     public void draw(Canvas canvas) {
-
+        super.draw(canvas);
         canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
 
 //        initBitmap();
@@ -240,6 +241,7 @@ public class VinylRecord extends SurfaceView implements SurfaceHolder.Callback, 
         //绘制透明圆形背景
         canvas.save();
         canvas.translate(mCoverCenterX, mCoverCenterY);
+        //noinspection SuspiciousNameCombination
         canvas.drawBitmap(mRecordBg, mRecordBgX, mRecordBgX, mPaint);
         canvas.restore();
 
@@ -247,6 +249,7 @@ public class VinylRecord extends SurfaceView implements SurfaceHolder.Callback, 
         mCoverMatrix.setRotate(mRotateAngle, mCoverCenterX, mCoverCenterY);
         mCoverMatrix.preTranslate(mCoverX, mCoverY);
         if (mCover != null) {
+            //noinspection SuspiciousNameCombination
             canvas.drawBitmap(
                     Bitmap.createScaledBitmap(mCover, mCoverWidth, mCoverWidth, true),
                     mCoverMatrix,
@@ -322,6 +325,7 @@ public class VinylRecord extends SurfaceView implements SurfaceHolder.Callback, 
         mIsPlaying = true;
     }
 
+    @SuppressWarnings("unused")
     public void pause() {
         mIsPlaying = false;
     }

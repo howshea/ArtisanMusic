@@ -12,7 +12,7 @@ import java.lang.ref.WeakReference;
 
 public abstract class BasePresenter <V extends IBaseView> {
 
-    protected Reference<V> mVReference;
+    private Reference<V> mVReference;
 
     //建立一个view的弱引用
     public BasePresenter(V view){
@@ -24,10 +24,12 @@ public abstract class BasePresenter <V extends IBaseView> {
         return mVReference.get();
     }
 
+    //double check，判断引用是否已经被回收
     public boolean isViewAttached(){
         return mVReference!=null&&mVReference.get()!=null;
     }
 
+    //解除Presenter对View的引用
     public void detachView(){
         if (mVReference != null) {
             mVReference.clear();

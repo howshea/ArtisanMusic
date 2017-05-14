@@ -28,7 +28,6 @@ public class SongsPresenter extends BasePresenter<ISongs> {
 
 
     private ArrayList<Song> mCurrentSongs = new ArrayList<>();
-    private String mListTitle;
 
     public SongsPresenter(ISongs view) {
         super(view);
@@ -43,7 +42,7 @@ public class SongsPresenter extends BasePresenter<ISongs> {
                         @Override
                         public void call(ArrayList<Song> songs) {
                             mCurrentSongs = new ArrayList<>(songs);
-                            if (isViewAttached() && songs != null) {
+                            if (isViewAttached()) {
                                 getView().closeLoading();
                                 getView().setAdapter(mCurrentSongs);
                             }
@@ -52,7 +51,6 @@ public class SongsPresenter extends BasePresenter<ISongs> {
         } else if (title.equals(AppApplication.getAppResources().getString(R.string.favorite_songs))) {
             getFavoriteSongs();
         } else {
-            mListTitle = title;
             getSongsOfList(title);
         }
     }

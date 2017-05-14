@@ -35,6 +35,7 @@ public class SongLab {
         mDatabase = new MusicDbOpenHelper(AppApplication.getAppContext()).getWritableDatabase();
     }
 
+    //double lock check 单例模式
     public static SongLab get() {
         if (sInstance == null) {
             synchronized (SongLab.class) {
@@ -46,13 +47,13 @@ public class SongLab {
         return sInstance;
     }
 
-    private static final class Holder {
-        private static SongLab sInstance = new SongLab();
-    }
+//    private static final class Holder {
+//        private static SongLab sInstance = new SongLab();
+//    }
 
-    public void setDatabase() {
-
-    }
+//    public void setDatabase() {
+//
+//    }
 
     /**
      * 操作音乐的业务
@@ -69,7 +70,7 @@ public class SongLab {
     }
 
 
-    public Callable<ArrayList<Song>> getSongsCallable() {
+    private Callable<ArrayList<Song>> getSongsCallable() {
         return new Callable<ArrayList<Song>>() {
             @Override
             public ArrayList<Song> call() {
@@ -79,10 +80,9 @@ public class SongLab {
     }
 
 
-    public ArrayList<Song> getSongs() {
+    private ArrayList<Song> getSongs() {
         ArrayList<Song> songs = new ArrayList<>();
-        MusicCursorWrapper cursor = querySongs(null, null);
-        try {
+        try (MusicCursorWrapper cursor = querySongs(null, null)) {
             if (cursor.getCount() == 0)
                 return null;
             cursor.moveToFirst();
@@ -90,21 +90,20 @@ public class SongLab {
                 songs.add(cursor.getSong());
                 cursor.moveToNext();
             }
-        } finally {
-            cursor.close();
         }
         return songs;
     }
 
     private MusicCursorWrapper querySongs(String whereClause, String[] args) {
-        Cursor cursor = mDatabase.query(SongTable.TABLE_NAME,
+        try (Cursor cursor = mDatabase.query(SongTable.TABLE_NAME,
                 null,
                 whereClause,
                 args,
                 null,
                 null,
-                SongTable.TITLE);
-        return new MusicCursorWrapper(cursor);
+                SongTable.TITLE)) {
+            return new MusicCursorWrapper(cursor);
+        }
     }
 
     private static ContentValues getSongContentValues(Song song) {
@@ -124,8 +123,7 @@ public class SongLab {
     }
 
     public Song getSong(long id) {
-        MusicCursorWrapper cursor = querySongs(SongTable.SONG_ID + "= ?", new String[]{String.valueOf(id)});
-        try {
+        try (MusicCursorWrapper cursor = querySongs(SongTable.SONG_ID + "= ?", new String[]{String.valueOf(id)})) {
             if (cursor.getCount() == 0) {
                 LogUtils.logi("歌曲不存在" + id + "  " + cursor.getCount() + String.valueOf(id));
                 return null;
@@ -133,22 +131,18 @@ public class SongLab {
                 cursor.moveToFirst();
                 return cursor.getSong();
             }
-        } finally {
-            cursor.close();
         }
     }
 
+    @SuppressWarnings("unused")
     public Song getSongByTitle(String title) {
-        MusicCursorWrapper cursor = querySongs(SongTable.TITLE + "= ?", new String[]{title});
-        try {
+        try (MusicCursorWrapper cursor = querySongs(SongTable.TITLE + "= ?", new String[]{title})) {
             if (cursor.getCount() == 0) {
                 return null;
             } else {
                 cursor.moveToFirst();
                 return cursor.getSong();
             }
-        } finally {
-            cursor.close();
         }
     }
 
@@ -173,7 +167,7 @@ public class SongLab {
 
     public int updateSong(Song song) {
         ContentValues values = getSongContentValues(song);
-        return  mDatabase.update(
+        return mDatabase.update(
                 SongTable.TABLE_NAME,
                 values,
                 SongTable.SONG_ID + "= ?",
@@ -219,20 +213,20 @@ public class SongLab {
     }
 
     private MusicCursorWrapper querySongLists(String whereClause, String[] args) {
-        Cursor cursor = mDatabase.query(SongListTable.TABLE_NAME,
+        try (Cursor cursor = mDatabase.query(SongListTable.TABLE_NAME,
                 null,
                 whereClause,
                 args,
                 null,
                 null,
-                null);
-        return new MusicCursorWrapper(cursor);
+                null)) {
+            return new MusicCursorWrapper(cursor);
+        }
     }
 
     public ArrayList<SongList> getSonglists() {
-        MusicCursorWrapper cursor = querySongLists(null, null);
         ArrayList<SongList> lists = new ArrayList<>();
-        try {
+        try (MusicCursorWrapper cursor = querySongLists(null, null)) {
             if (cursor.getCount() == 0) {
                 return null;
             }
@@ -241,8 +235,6 @@ public class SongLab {
                 lists.add(cursor.getSongList());
                 cursor.moveToNext();
             }
-        } finally {
-            cursor.close();
         }
         return lists;
     }
@@ -256,7 +248,8 @@ public class SongLab {
     }
 
     /**
-     * @param songId 歌曲ID
+     * 添加到歌单
+     * @param songId   歌曲ID
      * @param songList 歌单
      */
     public boolean addToList(long songId, SongList songList) {
@@ -274,49 +267,46 @@ public class SongLab {
     }
 
     private SongList getSongListByTitle(String listTitle) {
-        MusicCursorWrapper cursor = querySongLists(SongListTable.TITLE + "= ?", new String[]{listTitle});
-        try {
+        try (MusicCursorWrapper cursor = querySongLists(SongListTable.TITLE + "= ?", new String[]{listTitle})) {
             if (cursor.getCount() == 0) {
                 return null;
             } else {
                 cursor.moveToFirst();
                 return cursor.getSongList();
             }
-        } finally {
-            cursor.close();
         }
     }
 
     public SongList getSongList(UUID uuid) {
-        MusicCursorWrapper cursor = querySongLists(SongListTable.UUID + "= ?", new String[]{uuid.toString()});
-        try {
+        try (MusicCursorWrapper cursor = querySongLists(SongListTable.UUID + "= ?", new String[]{uuid.toString()})) {
             if (cursor.getCount() == 0) {
                 return null;
             } else {
                 cursor.moveToFirst();
                 return cursor.getSongList();
             }
-        } finally {
-            cursor.close();
         }
     }
 
 
     private MusicCursorWrapper querySongAndList(String whereClause, String[] args) {
-        Cursor cursor = mDatabase.query(SongAndListTable.TABLE_NAME,
+        try (Cursor cursor = mDatabase.query(SongAndListTable.TABLE_NAME,
                 null,
                 whereClause,
                 args,
                 null,
                 null,
-                null);
-        return new MusicCursorWrapper(cursor);
+                null)) {
+            return new MusicCursorWrapper(cursor);
+        }
     }
 
+    /**
+     * 通过歌单的id查询所有包含歌曲的id集合
+     */
     private List<Long> getSongIds(UUID songListId) {
-        MusicCursorWrapper cursor = querySongAndList(SongAndListTable.SONGLIST_UUID + "= ?", new String[]{songListId.toString()});
         List<Long> idList = new ArrayList<>();
-        try {
+        try (MusicCursorWrapper cursor = querySongAndList(SongAndListTable.SONGLIST_UUID + "= ?", new String[]{songListId.toString()})) {
             if (cursor.getCount() == 0) {
                 return null;
             } else {
@@ -326,16 +316,17 @@ public class SongLab {
                     cursor.moveToNext();
                 }
             }
-        } finally {
-            cursor.close();
         }
         return idList;
     }
 
+    /**
+     * 通过歌单名找出所有该歌单里包含的歌曲
+     */
     public ArrayList<Song> getSongsOfList(String listTitle) {
         ArrayList<Song> songs = new ArrayList<>();
         SongList songList = getSongListByTitle(listTitle);
-        UUID songListId = songList.getId();
+        UUID songListId = songList != null ? songList.getId() : null;
         //从中间表获取属于该歌单的所有歌曲id
         List<Long> songIds = getSongIds(songListId);
         if (songIds != null) {
@@ -347,16 +338,14 @@ public class SongLab {
     }
 
     /**
-     * 找出所有包含该歌曲id的歌单
-     *
-     * @param songId
-     * @return
+     * 找到所有包含该歌曲id的歌单
+     * @param songId 歌曲id
+     * @return List
      */
-    public ArrayList<SongList> getSongListsOfSongId(long songId) {
-        MusicCursorWrapper cursor = querySongAndList(SongAndListTable.SONG_ID + "= ?", new String[]{String.valueOf(songId)});
+    private ArrayList<SongList> getSongListsOfSongId(long songId) {
         List<UUID> listIds = new ArrayList<>();
         ArrayList<SongList> songLists = new ArrayList<>();
-        try {
+        try (MusicCursorWrapper cursor = querySongAndList(SongAndListTable.SONG_ID + "= ?", new String[]{String.valueOf(songId)})) {
             if (cursor.getCount() == 0) {
                 LogUtils.logi("找不到找不到");
                 return null;
@@ -367,8 +356,6 @@ public class SongLab {
                     cursor.moveToNext();
                 }
             }
-        } finally {
-            cursor.close();
         }
         for (UUID listId : listIds) {
             SongList songList = getSongList(listId);
@@ -378,6 +365,11 @@ public class SongLab {
     }
 
 
+    /**
+     * 删除某个歌单
+     * @param id SongList的id
+     * @return 是否删除成功
+     */
     public boolean deletSongList(UUID id) {
         int i = mDatabase.delete(SongListTable.TABLE_NAME, SongListTable.UUID + "=?",
                 new String[]{id.toString()});

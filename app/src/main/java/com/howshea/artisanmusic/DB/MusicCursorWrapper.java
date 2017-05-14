@@ -22,7 +22,9 @@ public class MusicCursorWrapper extends CursorWrapper {
     public MusicCursorWrapper(Cursor cursor) {
         super(cursor);
     }
-
+    /**
+     * 查询歌曲表
+     */
     public Song getSong() {
         long songId = getLong(getColumnIndex(SongTable.SONG_ID));
         String title = getString(getColumnIndex(SongTable.TITLE));
@@ -50,6 +52,9 @@ public class MusicCursorWrapper extends CursorWrapper {
         return song;
     }
 
+    /**
+     * 查询歌单表
+     */
     public SongList getSongList() {
         String uuidString = getString(getColumnIndex(SongListTable.UUID));
         String title = getString(getColumnIndex(SongListTable.TITLE));
@@ -60,6 +65,9 @@ public class MusicCursorWrapper extends CursorWrapper {
         return songList;
     }
 
+    /**
+     * 查询中间表
+     */
     public SongAndList getSongAndList() {
         Long songId = getLong(getColumnIndex(SongAndListTable.SONG_ID));
         UUID songlist_uuid = UUID.fromString(getString(getColumnIndex(SongAndListTable.SONGLIST_UUID)));

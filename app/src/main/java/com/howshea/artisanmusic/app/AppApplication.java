@@ -18,7 +18,8 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.ArrayList;
 
 /**
- * Created by haipo on 2016/11/1.
+ * Created by haipo
+ * on 2016/11/1.
  */
 
 public class AppApplication extends BaseApplication {
@@ -81,22 +82,18 @@ public class AppApplication extends BaseApplication {
      * 获取当前播放信息
      */
     public PlayStatusEvent getCurrentSongInfo() {
-        if (mPlayService == null)
-            return null;
-        return mPlayService.getCurrentSongInfo();
+        if (mPlayService != null) {
+            return mPlayService.getCurrentSongInfo();
+        }
+        return null;
     }
 
     /**
-     * mediaplayer是否有资源
      *
-     * @return
+     * @return mediaplayer是否有资源
      */
     public boolean isDataPrepared() {
-        if (mPlayService == null) {
-            return false;
-        } else {
-            return mPlayService.isDataPrepared();
-        }
+        return mPlayService != null && mPlayService.isDataPrepared();
     }
 
     public void seekTo(int position) {

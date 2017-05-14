@@ -15,7 +15,7 @@ public class SongAndList {
     public SongAndList() {
     }
 
-    public long getSongId() {
+    long getSongId() {
         return mSongId;
     }
 
@@ -23,7 +23,7 @@ public class SongAndList {
         mSongId = songId;
     }
 
-    public UUID getSongListId() {
+    UUID getSongListId() {
         return mSongListId;
     }
 
