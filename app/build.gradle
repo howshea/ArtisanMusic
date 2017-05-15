@@ -45,9 +45,6 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testCompile 'junit:junit:4.12'
-    compile 'org.greenrobot:eventbus:3.0.0'
-    apt 'org.greenrobot:eventbus-annotation-processor:3.0.1'
     compile rootProject.ext.dependencies.appcompatv7
     compile rootProject.ext.dependencies.design
     compile rootProject.ext.dependencies.rxjava
@@ -57,5 +54,11 @@ dependencies {
     apt rootProject.ext.dependencies.butterknifeCompiler
     compile rootProject.ext.dependencies.glide
     compile project(path: ':widgets')
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    testCompile 'junit:junit:4.12'
+    apt 'org.greenrobot:eventbus-annotation-processor:3.0.1'
 }
 
