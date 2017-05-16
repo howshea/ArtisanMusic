@@ -41,7 +41,7 @@ public class HttpRequest {
         mApiService = mRetrofit.create(ApiService.class);
     }
 
-    static HttpRequest getInstance() {
+    public static HttpRequest getInstance() {
         return HttpRequestHolder.sInstance;
     }
 
@@ -51,7 +51,7 @@ public class HttpRequest {
     }
 
 
-    Observable<HomePage> getHome(){
+    public Observable<HomePage> getHomePage(){
         return mApiService.getHome()
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())

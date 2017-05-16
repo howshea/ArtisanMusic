@@ -14,28 +14,33 @@
         <activity
             android:name=".UI.activity.MainActivity"
             android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name=".UI.activity.SongListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/CommonTheme" />
+        <activity
+            android:name=".UI.activity.PlayActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/PlayStyle" />
+
+        <service
+            android:name=".service.PlayService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".UI.activity.HomePageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/HomePageStyle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".UI.activity.SongListActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/CommonTheme"></activity>
-        <activity
-            android:name=".UI.activity.PlayActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:theme="@style/PlayStyle"></activity>
-
-        <service
-            android:name=".service.PlayService"
-            android:enabled="true"
-            android:exported="true"></service>
-
-        <activity android:name=".UI.activity.HomePageActivity"></activity>
     </application>
 
 </manifest>

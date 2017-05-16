@@ -22,7 +22,9 @@
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
-
+    <style name="HomePageStyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+    </style>
     <style name="SmallTextAppearance">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@android:color/darker_gray</item>
