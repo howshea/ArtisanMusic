@@ -7,9 +7,11 @@
     <ImageView
         android:id="@+id/home_page_background"
         android:background="#ffffff"
+        android:src="@drawable/play_default_bg"
         android:scaleType="centerCrop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
         android:minHeight="540dp"/>
     <LinearLayout
         android:background="#ffffff"

@@ -1,13 +1,18 @@
 package com.howshea.artisanmusic.UI.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.howshea.artisanmusic.R;
 import com.howshea.artisanmusic.UI.IView.IHomePageView;
+import com.howshea.artisanmusic.app.AppApplication;
 import com.howshea.artisanmusic.base.basemvp.BaseActivtiy;
-import com.howshea.artisanmusic.base.baseutils.LogUtils;
+import com.howshea.artisanmusic.event.AppExitEvent;
 import com.howshea.artisanmusic.presenter.HomePagePresenter;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 
@@ -31,11 +36,35 @@ public class HomePageActivity extends BaseActivtiy<IHomePageView, HomePagePresen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppApplication.getMyEventBus().register(this);
+        mPresenter.afterTwoSecToJump();
         mPresenter.getData();
+    }
+
+    @Override
+    protected void onDestroy() {
+        AppApplication.getMyEventBus().unregister(this);
+        super.onDestroy();
     }
 
     @Override
     public ImageView setImage() {
         return mHomePageBackground;
+    }
+
+    @Override
+    public void jumpToMainActivity() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(MainActivity.newIntent(HomePageActivity.this));
+                finish();
+            }
+        });
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void finish(AppExitEvent event) {
+        finish();
     }
 }

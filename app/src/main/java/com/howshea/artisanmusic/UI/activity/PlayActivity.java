@@ -1,5 +1,6 @@
 package com.howshea.artisanmusic.UI.activity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
@@ -109,6 +110,7 @@ public class PlayActivity extends BaseActivtiy<IPlay, PlayPresenter> implements 
     }
 
 
+    @SuppressLint("SetTextI18n")
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void setInterfaceEvent(PlayStatusEvent event) {
         //先置为零,避免切换歌曲时，由于seekbar的max变化，造成的seekbar指示器显示异常
@@ -146,7 +148,8 @@ public class PlayActivity extends BaseActivtiy<IPlay, PlayPresenter> implements 
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
 
         setSupportActionBar(mPlayToolBar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setSupportActionBar(mPlayToolBar);
+        //noinspection ConstantConditions
         getSupportActionBar().setHomeButtonEnabled(true);
     }
 
@@ -158,6 +161,7 @@ public class PlayActivity extends BaseActivtiy<IPlay, PlayPresenter> implements 
         ImageUtils.setSongBackground(song.getCoverUri(), mBackgroundImageView);
 //        mTitleTextView.setText(event.getSong().getTitle());
 //        mSubtitleTextView.setText(event.getSong().getArtist());
+        //noinspection ConstantConditions
         getSupportActionBar().setTitle(song.getTitle());
         getSupportActionBar().setSubtitle(song.getArtist());
         mPlayDurationTextView.setText(TimeUtil.timeParse(song.getDuration()));
@@ -201,6 +205,7 @@ public class PlayActivity extends BaseActivtiy<IPlay, PlayPresenter> implements 
         }
     }
 
+    @SuppressWarnings("ConstantConditions")
     @OnClick(R.id.play_menu_img)
     void showSongEditDialog() {
         FragmentManager fm = getSupportFragmentManager();
@@ -209,6 +214,7 @@ public class PlayActivity extends BaseActivtiy<IPlay, PlayPresenter> implements 
     }
 
     @OnClick(R.id.play_like_img)
+    @SuppressWarnings("UnusedParameters")
     void switchHeart(ImageView view) {
         setIsLike();
         Song song = mApp.getCurrentSongInfo().getSong();
@@ -223,6 +229,7 @@ public class PlayActivity extends BaseActivtiy<IPlay, PlayPresenter> implements 
     }
 
     @OnClick(R.id.play_mode_image_view)
+    @SuppressWarnings("UnusedParameters")
     void switchPlayMode(ImageView v) {
         ++mPlayMode;
         if (mPlayMode > 2) {
@@ -245,12 +252,14 @@ public class PlayActivity extends BaseActivtiy<IPlay, PlayPresenter> implements 
 
 
     @OnClick(R.id.prev_song_image_view)
+    @SuppressWarnings("UnusedParameters")
     void preSong(ImageView v) {
         mApp.preSong();
     }
 
 
     @OnClick(R.id.play_pause_image_view)
+    @SuppressWarnings("UnusedParameters")
     void playOrPause(ImageView v) {
         if (isPlaying) {
             isPlaying = false;
@@ -266,11 +275,13 @@ public class PlayActivity extends BaseActivtiy<IPlay, PlayPresenter> implements 
     }
 
     @OnClick(R.id.next_song_image_view)
+    @SuppressWarnings("UnusedParameters")
     void nextSong(ImageView v) {
         mApp.nextSong();
     }
 
     @OnClick(R.id.play_list_image_view)
+    @SuppressWarnings("UnusedParameters")
     void expendPlayList(ImageView v) {
         FragmentManager manager = getSupportFragmentManager();
         PlayListBottomFragment dialog = PlayListBottomFragment.newInstance();

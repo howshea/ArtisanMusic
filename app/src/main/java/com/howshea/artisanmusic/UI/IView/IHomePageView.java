@@ -11,4 +11,5 @@ import com.howshea.artisanmusic.base.basemvp.IBaseView;
 
 public interface IHomePageView  extends IBaseView{
     ImageView setImage();
+    void jumpToMainActivity();
 }

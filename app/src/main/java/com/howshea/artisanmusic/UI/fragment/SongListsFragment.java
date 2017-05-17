@@ -197,9 +197,7 @@ public class SongListsFragment extends BaseFragment<ISongListsView, SongListsPre
                         EditSongListDialog dialog = EditSongListDialog.newInstance(songList.getId(), songList.getTitle());
                         FragmentManager fm = getFragmentManager();
                         dialog.show(fm, TAG_EDITLIST);
-                        //加上这句是为了下面的getDialog()为空
                         getFragmentManager().executePendingTransactions();
-
                         dialog.getDialog().setOnCancelListener(new DialogInterface.OnCancelListener() {
                             @Override
                             public void onCancel(DialogInterface dialog) {
@@ -214,4 +212,6 @@ public class SongListsFragment extends BaseFragment<ISongListsView, SongListsPre
         });
         popupMenu.show();
     }
+
+
 }

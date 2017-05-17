@@ -10,6 +10,9 @@ import com.howshea.artisanmusic.base.baseutils.LogUtils;
 import com.howshea.artisanmusic.model.HomePage;
 import com.howshea.artisanmusic.network.HttpRequest;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import rx.Subscriber;
 
 /**
@@ -31,23 +34,36 @@ public class HomePagePresenter extends BasePresenter<IHomePageView> {
                     @Override
                     public void onNext(HomePage homePage) {
                         creativesBean = homePage.getCreatives().get(0);
-                        LogUtils.logd(creativesBean.getUrl()+"我的天呐");
-
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        unsubscribe();
                     }
 
                     @Override
                     public void onCompleted() {
                         if (isViewAttached()) {
                             showData();
+                        } else {
+                            unsubscribe();
                         }
                     }
 
                 });
+    }
+
+
+    public void afterTwoSecToJump() {
+        Timer timer = new Timer();// 实例化Timer类
+        timer.schedule(new TimerTask() {
+            public void run() {
+                if (isViewAttached()) {
+                    getView().jumpToMainActivity();
+                }
+                this.cancel();
+            }
+        }, 2000);// 这里百毫秒
     }
 
     private void showData() {
@@ -55,6 +71,5 @@ public class HomePagePresenter extends BasePresenter<IHomePageView> {
                 .load(creativesBean.getUrl())
                 .asBitmap()
                 .into(getView().setImage());
-
     }
 }

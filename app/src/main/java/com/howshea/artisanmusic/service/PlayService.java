@@ -73,7 +73,7 @@ public class PlayService extends Service {
         super.onCreate();
         //初始化mediaPlayer
         mPlayer = new MediaPlayer();
-        mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+//        mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
@@ -195,6 +195,7 @@ public class PlayService extends Service {
                         try {
                             mCurrentSong = songs.get(position);
                             mPlayer.reset();
+                            mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
                             mPlayer.setDataSource(songs.get(position).getUri());
                             mPlayer.prepare();
                             LogUtils.logi("正在播放：" + mCurrentSong.getTitle());

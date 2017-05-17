@@ -35,7 +35,6 @@ public class SongLab {
         mDatabase = new MusicDbOpenHelper(AppApplication.getAppContext()).getWritableDatabase();
     }
 
-    //double lock check 单例模式
     public static SongLab get() {
         if (sInstance == null) {
             synchronized (SongLab.class) {
@@ -50,7 +49,7 @@ public class SongLab {
 //    private static final class Holder {
 //        private static SongLab sInstance = new SongLab();
 //    }
-
+//
 //    public void setDatabase() {
 //
 //    }
@@ -95,15 +94,14 @@ public class SongLab {
     }
 
     private MusicCursorWrapper querySongs(String whereClause, String[] args) {
-        try (Cursor cursor = mDatabase.query(SongTable.TABLE_NAME,
+        Cursor cursor = mDatabase.query(SongTable.TABLE_NAME,
                 null,
                 whereClause,
                 args,
                 null,
                 null,
-                SongTable.TITLE)) {
-            return new MusicCursorWrapper(cursor);
-        }
+                SongTable.TITLE);
+        return new MusicCursorWrapper(cursor);
     }
 
     private static ContentValues getSongContentValues(Song song) {
@@ -213,15 +211,14 @@ public class SongLab {
     }
 
     private MusicCursorWrapper querySongLists(String whereClause, String[] args) {
-        try (Cursor cursor = mDatabase.query(SongListTable.TABLE_NAME,
+        Cursor cursor = mDatabase.query(SongListTable.TABLE_NAME,
                 null,
                 whereClause,
                 args,
                 null,
                 null,
-                null)) {
-            return new MusicCursorWrapper(cursor);
-        }
+                null);
+        return new MusicCursorWrapper(cursor);
     }
 
     public ArrayList<SongList> getSonglists() {
@@ -247,11 +244,7 @@ public class SongLab {
                 new String[]{uuidString});
     }
 
-    /**
-     * 添加到歌单
-     * @param songId   歌曲ID
-     * @param songList 歌单
-     */
+
     public boolean addToList(long songId, SongList songList) {
         ContentValues values = new ContentValues();
         values.put(SongAndListTable.SONG_ID, songId);
@@ -290,20 +283,16 @@ public class SongLab {
 
 
     private MusicCursorWrapper querySongAndList(String whereClause, String[] args) {
-        try (Cursor cursor = mDatabase.query(SongAndListTable.TABLE_NAME,
+        Cursor cursor = mDatabase.query(SongAndListTable.TABLE_NAME,
                 null,
                 whereClause,
                 args,
                 null,
                 null,
-                null)) {
-            return new MusicCursorWrapper(cursor);
-        }
+                null);
+        return new MusicCursorWrapper(cursor);
     }
 
-    /**
-     * 通过歌单的id查询所有包含歌曲的id集合
-     */
     private List<Long> getSongIds(UUID songListId) {
         List<Long> idList = new ArrayList<>();
         try (MusicCursorWrapper cursor = querySongAndList(SongAndListTable.SONGLIST_UUID + "= ?", new String[]{songListId.toString()})) {
@@ -320,13 +309,11 @@ public class SongLab {
         return idList;
     }
 
-    /**
-     * 通过歌单名找出所有该歌单里包含的歌曲
-     */
+    @SuppressWarnings("ConstantConditions")
     public ArrayList<Song> getSongsOfList(String listTitle) {
         ArrayList<Song> songs = new ArrayList<>();
         SongList songList = getSongListByTitle(listTitle);
-        UUID songListId = songList != null ? songList.getId() : null;
+        UUID songListId = songList.getId();
         //从中间表获取属于该歌单的所有歌曲id
         List<Long> songIds = getSongIds(songListId);
         if (songIds != null) {
@@ -338,9 +325,7 @@ public class SongLab {
     }
 
     /**
-     * 找到所有包含该歌曲id的歌单
-     * @param songId 歌曲id
-     * @return List
+     * 找出所有包含该歌曲id的歌单
      */
     private ArrayList<SongList> getSongListsOfSongId(long songId) {
         List<UUID> listIds = new ArrayList<>();
@@ -365,11 +350,6 @@ public class SongLab {
     }
 
 
-    /**
-     * 删除某个歌单
-     * @param id SongList的id
-     * @return 是否删除成功
-     */
     public boolean deletSongList(UUID id) {
         int i = mDatabase.delete(SongListTable.TABLE_NAME, SongListTable.UUID + "=?",
                 new String[]{id.toString()});
