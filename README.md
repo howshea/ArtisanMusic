@@ -14,6 +14,9 @@
 ### Version
 `v 1.0 beta`
 
+### 下载地址
+[http://fir.im/n28y](http://fir.im/n28y)
+
 ## 截图
 <img src="https://github.com/howshea/ArtisanMusic/raw/master/Screenshots/Screenshot_20161214-194027.png" width=200>  <img src="https://github.com/howshea/ArtisanMusic/raw/master/Screenshots/Screenshot_20161214-194017.png" width=200>   <img src="https://github.com/howshea/ArtisanMusic/raw/master/Screenshots/Screenshot_20161214-192246.png" width=200>   <img src="https://github.com/howshea/ArtisanMusic/raw/master/Screenshots/Screenshot_20161214-193209.png" width=200>
 

@@ -31,7 +31,6 @@ public class HomePageActivity extends BaseActivtiy<IHomePageView, HomePagePresen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LogUtils.logd("我的天呐");
         mPresenter.getData();
     }
 
