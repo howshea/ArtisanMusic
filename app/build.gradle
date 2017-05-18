@@ -8,7 +8,7 @@ apt {
 android {
     signingConfigs {
         config {
-         
+
         }
     }
     compileSdkVersion rootProject.ext.android.compileSdkVersion
