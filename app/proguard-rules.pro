@@ -39,7 +39,12 @@
 -keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef{
   rx.internal.util.atomic.LinkedQueueNode cosumerNode;
 }
+-dontwarn rx.Completable**
+-dontwarn retrofit2.adapter.rxjava.CompletableHelper$**
+-dontwarn org.codehaus.**
+-dontwarn java.nio.**
+-dontwarn java.lang.invoke.**
 # Only required if you use AsyncExecutor
 #-keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent {
-#    <init>(java.lang.Throwable);
+#    <init>(java.lang.Throwable);
 #}
