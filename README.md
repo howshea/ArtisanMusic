@@ -12,7 +12,7 @@
 - 播放列表自动定位到播放位置
 
 ### Version
-`v 1.0 beta`
+`v 1.1 beta`
 
 ### 下载地址
 [http://fir.im/n28y](http://fir.im/n28y)
