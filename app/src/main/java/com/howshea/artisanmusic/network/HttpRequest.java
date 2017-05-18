@@ -21,7 +21,7 @@ import rx.schedulers.Schedulers;
 
 public class HttpRequest {
 
-    private static final String BASE_URL = "http://news-at.zhihu.com/api/7/prefetch-launch-images/";
+    private static final String BASE_URL = "https://bing.ioliu.cn/v1/";
 
     private static final int DEFAULT_TIMEOUT = 5;
 
@@ -33,7 +33,7 @@ public class HttpRequest {
 
         Retrofit mRetrofit = new Retrofit.Builder()
                 .client(builder.build())
-                .addConverterFactory(GsonConverterFactory.create())
+//                .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .baseUrl(BASE_URL)
                 .build();

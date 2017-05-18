@@ -66,6 +66,7 @@ public class SongListActivity extends BasePlayBarMVPActivity<ISongs, SongsPresen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mSonglistTitle = getIntent().getStringExtra(EXTRA_SONGS);
+        //noinspection ConstantConditions
         getSupportActionBar().setTitle(mSonglistTitle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));

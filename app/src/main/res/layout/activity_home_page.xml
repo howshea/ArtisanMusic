@@ -6,13 +6,10 @@
     tools:context="com.howshea.artisanmusic.UI.activity.HomePageActivity">
     <ImageView
         android:id="@+id/home_page_background"
-        android:background="#ffffff"
         android:src="@drawable/play_default_bg"
         android:scaleType="centerCrop"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:minHeight="540dp"/>
+        android:layout_height="match_parent"/>
     <LinearLayout
         android:background="#ffffff"
         android:layout_alignParentBottom="true"

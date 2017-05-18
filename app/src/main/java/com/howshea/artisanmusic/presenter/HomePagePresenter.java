@@ -3,6 +3,7 @@ package com.howshea.artisanmusic.presenter;
 import android.util.Log;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.howshea.artisanmusic.UI.IView.IHomePageView;
 import com.howshea.artisanmusic.base.baseapp.BaseApplication;
 import com.howshea.artisanmusic.base.basemvp.BasePresenter;
@@ -22,35 +23,16 @@ import rx.Subscriber;
 
 public class HomePagePresenter extends BasePresenter<IHomePageView> {
 
-    private HomePage.CreativesBean creativesBean;
-
     public HomePagePresenter(IHomePageView view) {
         super(view);
     }
 
-    public void getData() {
-        HttpRequest.getInstance().getHomePage()
-                .subscribe(new Subscriber<HomePage>() {
-                    @Override
-                    public void onNext(HomePage homePage) {
-                        creativesBean = homePage.getCreatives().get(0);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        unsubscribe();
-                    }
-
-                    @Override
-                    public void onCompleted() {
-                        if (isViewAttached()) {
-                            showData();
-                        } else {
-                            unsubscribe();
-                        }
-                    }
-
-                });
+    public void getData(int width,int height) {
+        Glide.with(BaseApplication.getAppContext())
+                .load("https://bing.ioliu.cn/v1?&w="+width+"&h="+height)
+//                .asBitmap()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(getView().setImage());
     }
 
 
@@ -66,10 +48,4 @@ public class HomePagePresenter extends BasePresenter<IHomePageView> {
         }, 2000);// 这里百毫秒
     }
 
-    private void showData() {
-        Glide.with(BaseApplication.getAppContext())
-                .load(creativesBean.getUrl())
-                .asBitmap()
-                .into(getView().setImage());
-    }
 }

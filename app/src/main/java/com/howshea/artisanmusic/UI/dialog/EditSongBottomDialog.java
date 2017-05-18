@@ -2,6 +2,7 @@ package com.howshea.artisanmusic.UI.dialog;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.BottomSheetDialogFragment;
@@ -56,6 +57,7 @@ public class EditSongBottomDialog extends BottomSheetDialogFragment {
         mSong = (Song) getArguments().getSerializable(ARG_SONG);
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 

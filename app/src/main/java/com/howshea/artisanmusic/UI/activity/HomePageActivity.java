@@ -10,6 +10,7 @@ import com.howshea.artisanmusic.app.AppApplication;
 import com.howshea.artisanmusic.base.basemvp.BaseActivtiy;
 import com.howshea.artisanmusic.event.AppExitEvent;
 import com.howshea.artisanmusic.presenter.HomePagePresenter;
+import com.howshea.artisanmusic.utils.SystemUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -38,7 +39,7 @@ public class HomePageActivity extends BaseActivtiy<IHomePageView, HomePagePresen
         super.onCreate(savedInstanceState);
         AppApplication.getMyEventBus().register(this);
         mPresenter.afterTwoSecToJump();
-        mPresenter.getData();
+        mPresenter.getData(SystemUtil.getScreenWidth(this),SystemUtil.getScreenHeight(this));
     }
 
     @Override

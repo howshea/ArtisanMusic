@@ -48,3 +48,4 @@
 #-keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent {
 #    <init>(java.lang.Throwable);
 #}
+-keepnames class com.howshea.artisanmusic.utils.GlideConfiguration

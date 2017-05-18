@@ -3,6 +3,7 @@ package com.howshea.artisanmusic.network;
 import com.howshea.artisanmusic.model.HomePage;
 
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import rx.Observable;
 
 /**
@@ -12,6 +13,6 @@ import rx.Observable;
  */
 
 interface ApiService {
-    @GET("1080*1920")
+    @GET("?w=720&h=1280")
     Observable<HomePage> getHome();
 }
