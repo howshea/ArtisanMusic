@@ -41,4 +41,7 @@ captures/
 
 temp/
 gradle.properties
+
+bug_log.md
+
 /.idea/
