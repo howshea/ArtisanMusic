@@ -1,16 +1,11 @@
 package com.howshea.artisanmusic.network;
 
-import com.howshea.artisanmusic.model.HomePage;
-
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 
 /**
@@ -33,7 +28,7 @@ public class HttpRequest {
 
         Retrofit mRetrofit = new Retrofit.Builder()
                 .client(builder.build())
-//                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .baseUrl(BASE_URL)
                 .build();
@@ -51,11 +46,11 @@ public class HttpRequest {
     }
 
 
-    public Observable<HomePage> getHomePage(){
-        return mApiService.getHome()
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-    }
+//    public Observable<HomePage> getHomePage(){
+//        return mApiService.getHome()
+//                .subscribeOn(Schedulers.io())
+//                .unsubscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread());
+//    }
 
 }

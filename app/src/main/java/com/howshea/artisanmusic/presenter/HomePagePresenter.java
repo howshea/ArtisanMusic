@@ -1,20 +1,13 @@
 package com.howshea.artisanmusic.presenter;
 
-import android.util.Log;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.howshea.artisanmusic.UI.IView.IHomePageView;
 import com.howshea.artisanmusic.base.baseapp.BaseApplication;
 import com.howshea.artisanmusic.base.basemvp.BasePresenter;
-import com.howshea.artisanmusic.base.baseutils.LogUtils;
-import com.howshea.artisanmusic.model.HomePage;
-import com.howshea.artisanmusic.network.HttpRequest;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
-import rx.Subscriber;
 
 /**
  * Created by howshea
