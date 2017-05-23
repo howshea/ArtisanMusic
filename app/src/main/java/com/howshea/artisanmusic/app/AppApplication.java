@@ -11,8 +11,8 @@ import com.howshea.artisanmusic.base.baseutils.LogUtils;
 import com.howshea.artisanmusic.event.PlayStatusEvent;
 import com.howshea.artisanmusic.model.Song;
 import com.howshea.artisanmusic.service.PlayService;
+import com.howshea.artisanmusic.MyEventBusIndex;
 
-import org.eventbus.MyEventIndex;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ public class AppApplication extends BaseApplication {
     public void onCreate() {
         super.onCreate();
         LogUtils.logInit(BuildConfig.LOG_DEBUG);
-        mEventBus = EventBus.builder().addIndex(new MyEventIndex()).build();
+        mEventBus = EventBus.builder().addIndex(new MyEventBusIndex()).build();
         startAndBindService();
     }
 

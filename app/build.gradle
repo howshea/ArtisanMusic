@@ -1,14 +1,8 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
-apt {
-    arguments {
-        eventBusIndex "org.eventbus.MyEventIndex"
-    }
-}
 android {
     signingConfigs {
         config {
-         
+
         }
     }
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -20,6 +14,11 @@ android {
         versionCode 2
         versionName "1.1beta"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ eventBusIndex : 'com.howshea.artisanmusic.MyEventBusIndex' ]
+            }
+        }
     }
     buildTypes {
         release {
@@ -44,18 +43,18 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
     compile 'org.greenrobot:eventbus:3.0.0'
-    apt 'org.greenrobot:eventbus-annotation-processor:3.0.1'
+    annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.0.1'
     compile rootProject.ext.dependencies.appcompatv7
     compile rootProject.ext.dependencies.design
     compile rootProject.ext.dependencies.rxjava
     compile rootProject.ext.dependencies.rxAndroid
     compile rootProject.ext.dependencies.logger
-    compile rootProject.ext.dependencies.butterknife
-    apt rootProject.ext.dependencies.butterknifeCompiler
     compile rootProject.ext.dependencies.glide
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    compile 'com.jakewharton:butterknife:8.6.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
     compile project(path: ':widgets')
 }
 
