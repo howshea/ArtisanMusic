@@ -47,31 +47,12 @@ public class PlayListBottomFragment extends BottomSheetDialogFragment {
     private Song mCurrentSong;
     private Unbinder mUnbinder;
 
-    public static PlayListBottomFragment newInstance() {
-        return new PlayListBottomFragment();
-    }
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mApp = (AppApplication) getActivity().getApplication();
         mPlayList = mApp.getCurrentPlayList();
         mCurrentSong = mApp.getCurrentSongInfo().getSong();
-    }
-
-    @NonNull
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        BottomSheetDialog dialog = new BottomSheetDialog(getActivity());
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.bottom_dialog_play_list, null);
-        mUnbinder = ButterKnife.bind(this, view);
-        dialog.setContentView(view);
-
-        //修改dialog默认高度
-        BottomSheetBehavior<View> behavior = BottomSheetBehavior.from((View) view.getParent());
-        behavior.setPeekHeight(view.getMinimumHeight());
-//        behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-        return dialog;
     }
 
     @Override
@@ -103,6 +84,25 @@ public class PlayListBottomFragment extends BottomSheetDialogFragment {
     public void onDestroyView() {
         super.onDestroyView();
         mUnbinder.unbind();
+    }
+
+    public static PlayListBottomFragment newInstance() {
+        return new PlayListBottomFragment();
+    }
+
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        BottomSheetDialog dialog = new BottomSheetDialog(getActivity());
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.bottom_dialog_play_list, null);
+        mUnbinder = ButterKnife.bind(this, view);
+        dialog.setContentView(view);
+
+        //修改dialog默认高度
+        BottomSheetBehavior<View> behavior = BottomSheetBehavior.from((View) view.getParent());
+        behavior.setPeekHeight(view.getMinimumHeight());
+//        behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        return dialog;
     }
 
     private class PlayListHolder extends RecyclerView.ViewHolder
