@@ -22,19 +22,6 @@
 
 <img src="https://github.com/howshea/ArtisanMusic/raw/master/Screenshots/Screenshot_20161214-192520.png" width=200>  <img src="https://github.com/howshea/ArtisanMusic/raw/master/Screenshots/Screenshot_20161214-205357.png" width=200>   <img src="https://github.com/howshea/ArtisanMusic/raw/master/Screenshots/Screenshot_20161214-193007.png" width=200>   <img src="https://github.com/howshea/ArtisanMusic/raw/master/Screenshots/Screenshot_20161214-192644.png" width=200>
 
-## 知识点
-- **MVP**设计架构
-- 自定义的MVP框架，解决presenter持有activity或者fragment引用造成的内存泄漏问题
-- 自定义`SurfaceView`还原网易云的播放界面
-- `Service`和`BroadcaseReceiver`控制所有的播放逻辑
-- 歌曲表—中间表—歌单表 多对多的数据库设计
-- `CursorWrapper`
-- `BottomDialogFragment`的运用
-- 播放背景高斯模糊算法
-- 随机播放算法
-- `EventBus`事件传递
-- `RxJava`线程切换
-
 ## TODO
 - [ ] 加入歌词控件
 - [ ] 通过一些api联网自动加载歌词和封面
